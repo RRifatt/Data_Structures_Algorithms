@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Print circular linked list
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    if (head != NULL) {
+        do {
+            printf("%d -> ", temp->data);
+            temp = temp->next;
+        } while (temp != head);
+    }
+    printf("(back to head)\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    struct Node* second = NULL;
+    struct Node* third = NULL;
+
+    // Allocate memory
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+
+    // Assign data and links
+    head->data = 1;
+    head->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = head; // circular link
+
+    // Print the list
+    printList(head);
+
+    return 0;
+}
